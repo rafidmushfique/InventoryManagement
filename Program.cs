@@ -3,6 +3,7 @@ using InventoryManagement.Models.Domain;
 using InventoryManagement.Repository.Abstract;
 using InventoryManagement.Repository.Implementation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,12 @@ builder.Services.AddDbContext<INVDbContext>(
          builder.Configuration.GetConnectionString("ImsConn")
         )
     );
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
+    AddCookie(option => {
+        option.LoginPath = "/Home/Index";
+        option.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    });
 //Interfaces Intilization
 builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
@@ -34,6 +41,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
