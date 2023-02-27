@@ -17,6 +17,8 @@ namespace InventoryManagement.Repository.Implementation
         {
             try
             {
+                model.ActionType = "Insert";
+                model.ActionDate = DateTime.Now;
                 dbc.Products.Add(model);
                 return true;
             }

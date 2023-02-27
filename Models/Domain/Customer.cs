@@ -2,12 +2,13 @@
 {
     public class Customer
     {
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
+        public String CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string CustomerAddress { get; set; }
         public string CustomerContactInfo { get; set; }
 
-        public string ActionType { get; set; } = string.Empty;
-        public string ActionDate { get; set; } = DateTime.Now.ToString();
+        public string ActionType { get; set; } 
+        public DateTime ActionDate { get; set; } 
     }
 }

@@ -17,6 +17,8 @@ namespace InventoryManagement.Repository.Implementation
         public bool Add(User model)
         {
             try {
+                model.ActionType = "Insert";
+                model.ActionDate=DateTime.Now;
                 dbc.Users.Add(model);
                 dbc.SaveChanges();
                 return true;
@@ -44,7 +46,7 @@ namespace InventoryManagement.Repository.Implementation
             //}
 
         }
-
+     
         public User FindById(int id) => dbc.Users.Find(id);
 
         public IEnumerable<User> GetAll()

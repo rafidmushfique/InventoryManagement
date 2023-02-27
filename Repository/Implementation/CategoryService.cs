@@ -16,6 +16,8 @@ namespace InventoryManagement.Repository.Implementation
         public bool Add(Category model)
         {
             try {
+                model.ActionType = "Insert";
+                model.ActionDate= DateTime.Now;
                 dbc.Categories.Add(model);
                 dbc.SaveChanges();
                 return true;

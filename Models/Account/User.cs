@@ -4,16 +4,13 @@ namespace InventoryManagement.Models.Account
 {
     public class User
     {
-        public int UserId { get; set; }
-        [Required]
+        public int Id { get; set; }
+        public String UserId { get; set; }
         public string UserName { get; set; }
-        public string UserEmail { get; set; }= string.Empty;
-        [Required]
+        public string UserEmail { get; set; }
         public string Password { get; set; }
-        public int AccessLevel { get; set; } = 0;
-
-        public string ActionType { get; set; } = string.Empty;
-        public string ActionDate { get; set; } = DateTime.Now.ToString();
+        public string ActionType { get; set; } /*= "Insert";*/
+        public DateTime ActionDate { get; set; } /*= DateTime.Now.ToString();*/
 
     }
 }

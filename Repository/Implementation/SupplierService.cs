@@ -1,6 +1,7 @@
 ﻿using InventoryManagement.Models;
 using InventoryManagement.Models.Domain;
 using InventoryManagement.Repository.Abstract;
+using Microsoft.Data.SqlClient;
 
 namespace InventoryManagement.Repository.Implementation
 {
@@ -16,6 +17,8 @@ namespace InventoryManagement.Repository.Implementation
         {
             try
             {
+                model.ActionType = "Insert";
+                model.ActionDate = DateTime.Now;
                 dbc.Suppliers.Add(model);
                 return true;
             }
@@ -40,8 +43,14 @@ namespace InventoryManagement.Repository.Implementation
 
         public Supplier FindById(int id) => dbc.Suppliers.Find(id);
 
-        public IEnumerable<Supplier> GetAll() => dbc.Suppliers.ToList();
+        public IEnumerable<Supplier> GetAll()
+        { 
+        return dbc.Suppliers.Where(x=> x.ActionType !="Delete").ToList();
+        }
 
+        //public IEnumerable<JsonContent> GetAllData() {
+        //    SqlCommand sqlcmd = new SqlCommand(""); 
+        //}
         public bool Update(Supplier model)
         {
             try

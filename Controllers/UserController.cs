@@ -17,14 +17,20 @@ namespace InventoryManagement.Controllers
         }
         public IActionResult Login()
         {
+            @ViewData["vmsg"] = "";
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Login(VMLogin modelLogin)
         {
-            if (modelLogin.UserName == "admin@admin.com" && modelLogin.Password == "admin")
+            var usertext= System.Text.Encoding.UTF8.GetBytes(modelLogin.Password);
+            var userinputpass= System.Convert.ToBase64String(usertext);
+
+            var admintxt= System.Text.Encoding.UTF8.GetBytes("admin");
+            var adminpass=System.Convert.ToBase64String(admintxt);
+            if (modelLogin.UserId == "01" && userinputpass == adminpass)
             {
-                List<Claim> claims = new List<Claim>() { new Claim(ClaimTypes.NameIdentifier,modelLogin.UserName),
+                List<Claim> claims = new List<Claim>() { new Claim(ClaimTypes.NameIdentifier,modelLogin.UserId),
                 new Claim("OtherProperties","Example")
                 };
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

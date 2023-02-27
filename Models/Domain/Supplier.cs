@@ -1,14 +1,23 @@
-﻿namespace InventoryManagement.Models.Domain
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace InventoryManagement.Models.Domain
 {
     public class Supplier
     {
-        public int SupplierId { get; set; }
+        public int Id { get; set; }
+        
+        public String SupplierId { get; set; }
         public string SupplierName { get; set; }
         public string Address { get; set;}
         public string ContactInfo { get; set; }
-        public string ActionType { get; set; }= string.Empty;
-        public string ActionDate { get; set; } = DateTime.Now.ToString();
+        public string ActionType { get; set; }
+        public DateTime ActionDate { get; set; }
 
+        [NotMapped]
+        public IEnumerable<Supplier>? SuppliersList { get; set;}
+ 
     }
     }
 

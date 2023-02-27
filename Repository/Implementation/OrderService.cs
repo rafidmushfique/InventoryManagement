@@ -15,6 +15,8 @@ namespace InventoryManagement.Repository.Implementation
         public bool Add(Order model)
         {
             try {
+                model.ActionType = "Insert";
+                model.ActionDate = DateTime.Now;
              dbc.Orders.Add(model);
                 return true;
             } 
